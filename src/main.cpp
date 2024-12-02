@@ -32,8 +32,8 @@ void printESPInfo() {
   Serial.println("Flash");
   Serial.print("  getFlashChipSize: "); prettyPrintBytes(ESP.getFlashChipSize());
   Serial.printf("  getFlashChipSpeed: %d MHz\n", ESP.getFlashChipSpeed() / 1000 / 1000);
-  Serial.print("  getFlashChipMode: ");
-  Serial.println("SKIPPED");
+  // ESP.getFlashChipMode() on the ESP32-S3 crashes the CPU
+  Serial.print("  getFlashChipMode: "); Serial.println("SKIPPED");
 //  switch (ESP.getFlashChipMode()) {
 //    case FM_QIO:
 //      Serial.println("QIO");
@@ -76,12 +76,15 @@ void printESPInfo() {
 
 void setup() {
   Serial.begin(115200);
+  // WS2818 is compatible with WS2811 but uses GRB
   CFastLED::addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setBrightness(32);
 
   delay(1000);
   printESPInfo();
 
+  // Going to loop function crashes the CPU
+  // Instead use an infinite loop in setup
   while (true) {
     leds[0] = CRGB::Red;
     FastLED.delay(500);

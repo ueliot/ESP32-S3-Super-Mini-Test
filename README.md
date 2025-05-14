@@ -1,4 +1,4 @@
-# ESP32-S3-Super-Mini-Test
+# ESP32-S3-Super-Mini-Test - https://www.espboards.dev/esp32/esp32-s3-super-mini/ 
 
 PlatformIO template for a random "ESP32-S3 Super Mini" product based on the ESP32-S3FH4R2 I found. (4MB flash, 2MB PSRAM) Prints all system info and flashes the built-in WS2818.
 
